@@ -78,7 +78,7 @@ public class ImportRunner implements Runnable {
 
         String deviceId = matcher.group(3);
 
-        if (deviceId == null || "".equalsIgnoreCase(deviceId.trim()) || Constants.FILTER.equalsIgnoreCase(deviceId.trim()))
+        if (deviceId == null || "".equalsIgnoreCase(deviceId.trim()))
             return null;
 
         String action_time = matcher.group(4);

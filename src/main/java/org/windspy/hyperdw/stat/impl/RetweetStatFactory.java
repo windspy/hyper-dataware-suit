@@ -3,6 +3,7 @@ package org.windspy.hyperdw.stat.impl;
 import org.windspy.hyperdw.stat.Stat;
 import org.windspy.hyperdw.stat.StatFactory;
 import org.windspy.hyperdw.stat.hint.RetweetStatHint;
+import org.windspy.hyperdw.util.ConfigUtils;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,8 +13,8 @@ import org.windspy.hyperdw.stat.hint.RetweetStatHint;
  * To change this template use File | Settings | File Templates.
  */
 public class RetweetStatFactory extends StatFactory{
-    public static final String SHARE_HINT = "/api/share/article?";
-    public static final String SHARE_ARTICLEID_HINT = "articleId=";
+    public static final String SHARE_HINT = ConfigUtils.getProperty("SHARE_HINT", "/api/share/ob?");
+    public static final String SHARE_ID_HINT = ConfigUtils.getProperty("SHARE_ID_HINT","Id=");
 
     public Stat create(String statId, String action) {
         if (action==null) return null;
@@ -31,9 +32,9 @@ public class RetweetStatFactory extends StatFactory{
 
         int share_index = action.indexOf(SHARE_HINT);
         if ( share_index > -1) {
-            int start = action.indexOf(SHARE_ARTICLEID_HINT);
+            int start = action.indexOf(SHARE_ID_HINT);
             int end = action.lastIndexOf(" ");
-            articleId = action.substring(start+SHARE_ARTICLEID_HINT.length(),end);
+            articleId = action.substring(start+SHARE_ID_HINT.length(),end);
         }else
             return null;
 

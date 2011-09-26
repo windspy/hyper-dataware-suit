@@ -2,8 +2,8 @@ package org.windspy.hyperdw.stat.impl;
 
 import org.windspy.hyperdw.stat.Stat;
 import org.windspy.hyperdw.stat.StatFactory;
-import org.windspy.hyperdw.stat.StatHint;
 import org.windspy.hyperdw.stat.hint.LikeStatHint;
+import org.windspy.hyperdw.util.ConfigUtils;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,8 +13,8 @@ import org.windspy.hyperdw.stat.hint.LikeStatHint;
  * To change this template use File | Settings | File Templates.
  */
 public class LikedStatFactory extends StatFactory{
-    public static final String LIKED_HINT = "/api/article/like?";
-    public static final String LIKED_ARTICLEID_HINT = "articleId=";
+    public static final String LIKED_HINT = ConfigUtils.getProperty("LIKED_HINT","/api/like?");
+    public static final String LIKED_ID_HINT = ConfigUtils.getProperty("LIKED_ID_HINT","Id=");
 
     @Override
     public Stat create(String statId, String action) {
@@ -32,10 +32,10 @@ public class LikedStatFactory extends StatFactory{
          String articleId = null;
         int share_index = action.indexOf(LIKED_HINT);
         if ( share_index > -1) {
-            if (action.indexOf(LIKED_HINT+"type=1")>-1) return null;
-            int start = action.indexOf(LIKED_ARTICLEID_HINT);
+            if (action.indexOf(LIKED_HINT)>-1) return null;
+            int start = action.indexOf(LIKED_ID_HINT);
             int end = action.lastIndexOf(" ");
-            articleId = action.substring(start+LIKED_ARTICLEID_HINT.length(),end);
+            articleId = action.substring(start+LIKED_ID_HINT.length(),end);
         }else
             return null;
         return new Stat(new LikeStatHint(), articleId);
