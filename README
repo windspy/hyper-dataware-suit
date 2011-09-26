@@ -1,0 +1,5 @@
+A common dataware suit for processing apache logs which is build based on hypertable.
+
+Dependencies:
+1. hypertable (http://www.hypertable.org/) and thrift client
+2. apache log directory, the format can be customized
