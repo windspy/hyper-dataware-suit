@@ -26,8 +26,10 @@ public class StatRunner {
         for (StatFactory currnt:factories)
             add2List(currnt);
     }
+    private StatRunner(){
 
-    public  StatRunner(List<StatFactory> factories){
+    }
+    public StatRunner(List<StatFactory> factories){
          init(factories);
     }
 
